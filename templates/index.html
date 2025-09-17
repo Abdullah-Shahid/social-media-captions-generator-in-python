@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Social Media Caption Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"> <!-- external CSS -->
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h2 class="logo">AI Caption Generator</h2>
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">How it Works</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Free AI Social Media Caption Generator</h1>
+            <p>Instantly create engaging, catchy captions for your social posts. Save time and boost creativity.</p>
+        </div>
+    </section>
+
+    <main class="main container">
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2>Generate Your Captions</h2>
+            <p class="section-subtitle">Fill in the details below and let AI do the magic!</p>
+            <form action="/" method="post" onsubmit="showLoader()">
+                <label for="description">Caption this content:</label>
+                <textarea name="description" id="description" placeholder="Enter your post idea..." rows="5"
+                    required></textarea>
+
+                <label for="tone">Writing Tone:</label>
+                <select name="tone" id="tone">
+                    <option value="formal">👔 Formal</option>
+                    <option value="friendly">🙂 Friendly</option>
+                    <option value="casual">😎 Casual</option>
+                    <option value="professional">💼 Professional</option>
+                    <option value="confident">💪 Confident</option>
+                    <option value="academic">🎓 Academic</option>
+                    <option value="simplified">📖 Simplified</option>
+                    <option value="vivid">🦄 Vivid</option>
+                    <option value="luxury">💎 Luxury</option>
+                    <option value="engaging">👍 Engaging</option>
+                </select>
+
+                <label for="length">Length:</label>
+                <select name="length" id="length">
+                    <option value="short">Short</option>
+                    <option value="medium">Medium</option>
+                    <option value="long">Long</option>
+                </select>
+
+                <label for="social_media_platform">Social Media Platform:</label>
+                <select name="social_media_platform" id="social_media_platform">
+                    <option value="instagram">Instagram</option>
+                    <option value="twitter">Twitter</option>
+                    <option value="linkedIn">LinkedIn</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="tiktok">Tiktok</option>
+                    <option value="pinterest">Pinterest</option>
+                    <option value="youtube">Youtube</option>
+                </select>
+
+                <button type="submit">✨ Generate Caption</button>
+                <div id="loader" style="display: none;"></div>
+            </form>
+            {% if captions %}
+            <h3 class="output fade-up">Generated Captions</h3>
+            <p class="captions fade">{{captions}}</p>
+            <button class="copy-btn" onclick="copyCaptions()">📋 Copy to Clipboard</button>
+            {% endif %}
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use">
+            <h2>How to Use</h2>
+            <div class="steps">
+                <div class="step">
+                    <span>1</span>
+                    <p>Enter your content idea or topic.</p>
+                </div>
+                <div class="step">
+                    <span>2</span>
+                    <p>Choose tone, length, and platform.</p>
+                </div>
+                <div class="step">
+                    <span>3</span>
+                    <p>Click "Generate Caption" and get instant results.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>⚡ Fast Generation</h3>
+                    <p>Get captions instantly without any waiting.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Platform Specific</h3>
+                    <p>Optimized for Instagram, Facebook, TikTok, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💡 Creative Tones</h3>
+                    <p>Choose from formal, friendly, casual, and more writing styles.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AI Caption Generator. All Rights Reserved.</p>
+            <p class="disclaimer">Disclaimer: This tool uses AI and may sometimes produce unusual or inaccurate
+                information. Please review before using.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        function showLoader() {
+            document.getElementById("loader").style.display = "block";
+        }
+
+        // Copy captions
+        function copyCaptions() {
+            const captions = document.querySelector(".captions").innerText;
+            navigator.clipboard.writeText(captions).then(() => {
+                alert("✅ Captions copied to clipboard!");
+            });
+        }
+
+        // Scroll animations
+        const elements = document.querySelectorAll(".fade-up, .fade");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = "0.2s";
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        elements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
